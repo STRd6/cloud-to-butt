@@ -1,24 +1,19 @@
-walk(document.body);
+walk(document);
 
-function walk(node) 
+function walk(node)
 {
 	// I stole this function from here:
 	// http://is.gd/mwZp7E
-	
-	var child, next;
-	
-	if (node.tagName.toLowerCase() == 'input' || node.tagName.toLowerCase() == 'textarea'
-	    || node.classList.indexOf('ace_editor') > -1) {
-		return;
-	}
 
-	switch ( node.nodeType )  
+	var child, next;
+
+	switch ( node.nodeType )
 	{
 		case 1:  // Element
 		case 9:  // Document
 		case 11: // Document fragment
 			child = node.firstChild;
-			while ( child ) 
+			while ( child )
 			{
 				next = child.nextSibling;
 				walk(child);
@@ -32,12 +27,14 @@ function walk(node)
 	}
 }
 
-function handleText(textNode) 
+function handleText(textNode)
 {
 	var v = textNode.nodeValue;
 
 	v = v.replace(/\bIoT\b/ig, "scrotum");
-	v = v.replace(/\bInternet of Things\b/ig, "pair of testicles");
-	
+	v = v.replace(/\bInternet of Things\b/g, "Pair of Testicles");
+	v = v.replace(/\bInternet of things\b/g, "Pair of testicles");
+	v = v.replace(/\binternet of things\b/ig, "pair of testicles");
+
 	textNode.nodeValue = v;
 }
